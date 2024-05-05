@@ -23,11 +23,13 @@ The system uses the following steps to recommend movies:
 
 ### Data Preprocessing:
 Load the dataset and preprocess the data (e.g., handle missing values, convert categorical variables to numerical values).
+The data is preprocessed using NLP(natural language processing) techniques. (PorterStemmer etc.)
 ### Feature Extraction:
 Extract features from the movie content (e.g., genre, cast, director) using text processing techniques (e.g., TF-IDF).
 ### Similarity Calculation:
 Calculate the similarity between movies based on their features (e.g., cosine similarity).
 Recommendation Generation: For a given movie, find similar movies based on the calculated similarities and recommend them to the user.
 ### Deployment:
+First the variable containing cosine similarity matrix and movie list dictinary are dump as .pkl file as named "similarity.pkl" and "movie_dic.pkl" respectively , So to use them in Deplyment.
 The system is deployed using Flask Python framework
 The deploy model simply take movie name from one html file and request the main.py file to recommendate movies.
