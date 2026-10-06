@@ -1,36 +1,92 @@
-# Movie Recommendation System using Content-Based Filtering
-- This is a movie recommendation system that eecommendate movies based on the similarity of the movies with the given movie entered by user.
+# Content-Based Movie Recommendation System
 
-## Overview
-- The system uses content-based filtering to recommend movies. It analyzes the features of movies (such as genre, cast, director, etc.) to find similar movies and recommend them to users.
-
-## Requirements
-- Python 3.x
-- Pandas
-- Scikit-learn
-- NumPy
-- Flask
-- Requets
-- Response
-
-Enter a movie title when prompted, and the system will recommend similar movies.
-
-## Dataset
-- The system uses the tmbd dataset, specifically the tmdb_5000_moviea.csv and tmdb_5000_credits.csv files.
+A content-based movie recommendation application that finds movies similar to a user-selected title using movie metadata and text-similarity techniques.
 
 ## How it works
-- The system uses the following steps to recommend movies:
 
-### Data Preprocessing:
-- Load the dataset and preprocess the data (e.g., handle missing values, convert categorical variables to numerical values).
-- The data is preprocessed using NLP(natural language processing) techniques. (PorterStemmer etc.)
-### Feature Extraction:
-Extract features from the movie content (e.g., genre, cast, director) using text processing techniques (e.g., TF-IDF).
-### Similarity Calculation:
-- Calculate the similarity between movies based on their features (e.g., cosine similarity).
-- Recommendation Generation: For a given movie, find similar movies based on the calculated similarities and recommend them to the user.
-### Deployment:
-- First the variable containing cosine similarity matrix and movie list dictinary are dump as .pkl file as named "similarity.pkl" and "movie_dic.pkl" respectively , So to use them in Deplyment.
-- The system is deployed using Flask Python framework
-- The deploy model simply take movie name from one html file and request the main.py file to recommendate movies.
+```
+Movie metadata
+     ↓
+Text preprocessing
+     ↓
+Feature representation
+     ↓
+Cosine similarity
+     ↓
+Top similar movies
+     ↓
+Flask web application
+```
 
+The training notebook preprocesses movie metadata with NLP techniques such as stemming and builds a similarity-based recommendation system. The deployment component loads the precomputed movie data and similarity matrix and serves recommendations through Flask.
+
+## Features
+
+- Content-based recommendation rather than collaborative filtering.
+- NLP preprocessing of movie metadata.
+- Similarity calculation using cosine similarity.
+- Precomputed artifacts for fast inference in the web application.
+- Flask-based web interface.
+
+## Technology
+
+**Python · Pandas · NumPy · scikit-learn · NLTK · Flask · HTML/CSS**
+
+## Repository structure
+
+```
+.
+├── movie_recommend.ipynb
+├── deplyment/
+│   ├── application.py
+│   └── templates/
+└── README.md
+```
+
+> The original directory name `deplyment` is retained to avoid breaking the existing project structure.
+
+## Running the project
+
+### Notebook
+
+Open `movie_recommend.ipynb` to inspect the data preprocessing and recommendation pipeline.
+
+### Flask application
+
+The deployment code expects the precomputed `movies.pkl` and `similarity.pkl` artifacts in the working directory used by the Flask application.
+
+Install the required Python packages:
+
+```bash
+pip install pandas numpy scikit-learn nltk flask requests
+```
+
+Then run the Flask application from the deployment directory after placing the required model artifacts there:
+
+```bash
+python application.py
+```
+
+## What I learned
+
+This project was an early hands-on implementation of a recommendation workflow: transforming unstructured movie metadata into features, measuring item-to-item similarity, and connecting the result to a usable web application.
+
+## Limitations
+
+- Recommendations depend on the metadata representation used by the project.
+- The current implementation performs a simple title lookup and similarity ranking.
+- There is no offline recommendation evaluation suite in the repository yet.
+
+## Possible next steps
+
+- Add precision@k / recall@k style evaluation.
+- Improve feature engineering and handle missing metadata more systematically.
+- Add input validation and an API layer.
+- Containerize the Flask service.
+- Add automated tests and CI.
+
+## Author
+
+**Ronak Vekariya**
+
+[GitHub](https://github.com/Ronakvekariya)
